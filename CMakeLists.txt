@@ -3,10 +3,4 @@ project(ds_tasks_homework)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ds_tasks_homework main.cpp
-        utilities.h
-        utilities.cpp
-        tasks.h
-        tasks.cpp
-        product.h
-        product.cpp)
+add_executable(ds_tasks_homework main.cpp)
