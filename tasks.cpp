@@ -3,6 +3,8 @@
 #include <stack>
 #include <queue>
 #include <list>
+#include <limits>
+#include <cassert>
 #include "tasks.h"
 #include "utilities.h"
 #include "product.h"
@@ -53,7 +55,7 @@ buffer<int> user_enter_fixed_size_numbers(int size) {
 
 /*
  * Method #2 to accept user input through keyboard and stored in fixed size buffer without specifying the buffer size. The Process will terminate either
- * if a user hits the max trials allowed or once predicate is true. The output buffer will realloc a new chunk of "FIXED_BUFFER_SIZE" if predicate is not
+ * if a user hits the max trials allowed or once predicate is true. The output buffer will reallocate a new chunk of "FIXED_BUFFER_SIZE" if predicate is not
  * equal to true. However, the process will terminate if the user hits the max trail even if predicate is not equal to true.
 */
 buffer<int> user_enter_numbers_until_predicate() {
@@ -114,7 +116,7 @@ int *user_enter_a_number() {
         char_buffer.values[FIXED_BUFFER_SIZE - 1] = '\0';
         if (as_number(&char_buffer)) {
             std::cout << "You Entered the number: " << char_buffer.values << std::endl;
-            *n = std::stoi(char_buffer.values);;
+            *n = std::stoi(char_buffer.values);
             break;
         } else {
             if (trial_count == MAX_TRIAL_ENTERS - 1) {

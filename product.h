@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "utilities.h"
 
 typedef enum {
     Percent_20,

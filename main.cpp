@@ -1,28 +1,12 @@
 #include <iostream>
 #include <map>
 #include "product.h"
+#include "tasks.h"
 
-void product_class_demo() {
-    std::map<std::string, double> row_data{{"2\" BRASS GATE VALVE",                       11.8},
-                                           {"1\" uPVC H.P.ELBOW 90DEG S/W FIP",           0.2995},
-                                           {"1\" uPVC H.P.END CAP S/W FIP",               0.19233},
-                                           {"1\" x 3/4\" uPVC H.P.REDUCING BUSH S/W FIP", 0.1925}};
-    ProductRepository productRepository = ProductRepository();
-    for (int i = 0; i < row_data.size(); ++i) {
-        auto it = row_data.begin();
-        std::advance(it, i);
-        productRepository.add_a_product_to_repo(it->first, it->second, 500);
-    }
-    productRepository.print_repo_products();
-    std::cout << std::endl;
-    MakePurchase makePurchase = productRepository.purchase_a_product(4, 400);
-    productRepository.print_purchase_product(makePurchase);
-    std::cout << std::endl;
-    productRepository.print_repo_products();
-    free(productRepository._buffer.values);
-}
 
 int main() {
+
+    product_class_demo();
 
     return 0;
 

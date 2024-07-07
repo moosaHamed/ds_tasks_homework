@@ -16,5 +16,7 @@ std::tuple<int, buffer<int>, std::string> get_a_three_digit_number_factors( int 
 buffer<int> split_odd_even_asides(const buffer<int> &int_buffer);
 int get_maximum_using_stack(const buffer<int> &buffer);
 int get_smallest_using_queue(const buffer<int> &buffer);
+void store_movies_in_map();
+void product_class_demo();
 
 #endif //DS_TASKS_HOMEWORK_TASKS_H
