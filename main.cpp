@@ -11,7 +11,7 @@
 #include <map>
 
 
-/** Comments all Tasks and Run Only One Task Per Process **/
+/** Fixed two consts sizes to control the allocation process in memory and limited it **/
 static const int FIXED_BUFFER_SIZE = 8;
 static const int MAX_TRIAL_ENTERS = 16;
 
