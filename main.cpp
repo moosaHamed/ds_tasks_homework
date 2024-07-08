@@ -112,9 +112,10 @@ buffer<int> user_enter_fixed_size_numbers(int size) {
 }
 
 /*
- * Method #2 to accept user input through keyboard and stored in fixed size buffer without specifying the buffer size. The Process will terminate either
- * if a user hits the max trials allowed or once predicate is true. The output buffer will reallocate a new chunk of "FIXED_BUFFER_SIZE" if predicate is not
- * equal to true. However, the process will terminate if the user hits the max trail even if predicate is not equal to true.
+ * Method #2 to accept user input through keyboard and stored in fixed size buffer without specifying the buffer size.
+ * The Process will terminate either if a user hits the max trials allowed or once predicate is true.The output buffer
+ * will reallocate a new chunk of "FIXED_BUFFER_SIZE" if predicate is not equal to true.However, the process will
+ * terminate if the user hits the max trail even if predicate is not equal to true.
 */
 buffer<int> user_enter_numbers_until_predicate() {
     buffer<char> char_buffer = buffer_alloc<char>(FIXED_BUFFER_SIZE);
@@ -313,18 +314,25 @@ public:
     void print_purchase_product(MakePurchase &makePurchase) const {
         for (int i = 0; i < occupied_slots; ++i) {
             if (_buffer.values[i].Id == makePurchase.product_id) {
-                std::cout << std::string(134, '_') + "\n| You purchased the following:" + std::string(103, ' ') + "|\n" + std::string(134, '-') + "\n" +
-                             "| ID | Product Name" + std::string(28, ' ') +
-                             "| Qty. | Unit Price (OMR) | Total Price (OMR) | Discount | Total After Discount (OMR) |\n" + std::string(134, '-') + "\n" +
-                             "| " + std::to_string(_buffer.values[i].Id) + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ') + "| "
-                             + _buffer.values[i].ProductName + std::string(40 - _buffer.values[i].ProductName.size(), ' ') + "| "
-                             + std::to_string(makePurchase.requestedQty) + std::string(5 - std::to_string(makePurchase.requestedQty).size(), ' ') + "| "
-                             + std::to_string(_buffer.values[i].UnitPrice) + std::string(17 - std::to_string(_buffer.values[i].UnitPrice).size(), ' ') + "| "
-                             + std::to_string(makePurchase.totalPrice) + std::string(18 - std::to_string(makePurchase.totalPrice).size(), ' ') + "| "
-                             + makePurchase.discount + std::string(9 - makePurchase.discount.size(), ' ') + "| " + std::to_string(makePurchase.totalAfterPrice)
-                             + std::string(27 - std::to_string(makePurchase.totalAfterPrice).size(), ' ') + "|\n" + std::string(134, '-') + "\n";
+                std::cout << std::string(134, '_') + "\n| You purchased the following:" + std::string(103, ' ')
+                             + "|\n" + std::string(134, '-') + "\n" + "| ID | Product Name" + std::string(28, ' ')
+                             + "| Qty. | Unit Price (OMR) | Total Price (OMR) | Discount | Total After Discount (OMR) |\n"
+                             + std::string(134, '-') + "\n" + "| " + std::to_string(_buffer.values[i].Id)
+                             + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ') + "| "
+                             + _buffer.values[i].ProductName + std::string(40 - _buffer.values[i].ProductName.size(), ' ')
+                             + "| " + std::to_string(makePurchase.requestedQty)
+                             + std::string(5 - std::to_string(makePurchase.requestedQty).size(), ' ')
+                             + "| " + std::to_string(_buffer.values[i].UnitPrice)
+                             + std::string(17 - std::to_string(_buffer.values[i].UnitPrice).size(), ' ')
+                             + "| " + std::to_string(makePurchase.totalPrice)
+                             + std::string(18 - std::to_string(makePurchase.totalPrice).size(), ' ')
+                             + "| " + makePurchase.discount + std::string(9 - makePurchase.discount.size(), ' ')
+                             + "| " + std::to_string(makePurchase.totalAfterPrice)
+                             + std::string(27 - std::to_string(makePurchase.totalAfterPrice).size(), ' ')
+                             + "|\n" + std::string(134, '-') + "\n";
                 break;
-            } else if (i == occupied_slots - 1 && _buffer.values[i].Id != makePurchase.product_id) std::cout << makePurchase.message << std::endl;
+            } else if (i == occupied_slots - 1 && _buffer.values[i].Id != makePurchase.product_id)
+                std::cout << makePurchase.message << std::endl;
             else continue;
         }
     }
