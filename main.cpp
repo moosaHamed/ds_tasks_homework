@@ -489,94 +489,92 @@ int main() {
     /** Comments all Tasks and Run Only One Task Per Process **/
     /**********************************************************/
 
-//    /** Task #1: a) User enters 3 numbers and display the maximum one **/
-//    buffer<int> _buffer = user_enter_fixed_size_numbers(3);
-//    if (_buffer.values && _buffer.size == 3) {
-//        int *max = ptr_to_maximum(&_buffer);
-//        std::cout << std::endl;
-//        std::cout << "The Maximum Number is: " << *max << std::endl;
-//        free(_buffer.values);
-//    } else {
-//        if (_buffer.values && _buffer.size > 0) free(_buffer.values);
-//    }
-//
-//    /** Task #1: b) User enters numbers until predicate and display the maximum one **/
-//    buffer<int> _buffer_01 = user_enter_numbers_until_predicate();
-//    if (_buffer_01.values && _buffer_01.size > 0) {
-//        int *max = ptr_to_maximum(&_buffer_01);
-//        std::cout << std::endl;
-//        std::cout << "The Maximum Number is: " << *max << std::endl;
-//        free(_buffer_01.values);
-//    }
-//
-//    /** Task #1: c) Product class **/
-//    product_class_demo();
-//
-//    /** Task #2: Print all factors of a number **/
-//    std::tuple<int, buffer<int>, std::string> tuple_1 = get_a_three_digit_number_factors(84862);
-//    if (std::get<0>(tuple_1) > 0) {
-//        buffer<int> buffer = std::get<1>(tuple_1);
-//        std::cout << std::get<2>(tuple_1);
-//        print_buffer(buffer);
-//    }
+    /** Task #1: a) User enters 3 numbers and display the maximum one **/
+    buffer<int> _buffer = user_enter_fixed_size_numbers(3);
+    if (_buffer.values && _buffer.size == 3) {
+        int *max = ptr_to_maximum(&_buffer);
+        std::cout << std::endl;
+        std::cout << "The Maximum Number is: " << *max << std::endl;
+        free(_buffer.values);
+    } else {
+        if (_buffer.values && _buffer.size > 0) free(_buffer.values);
+    }
 
-//    /** Task #3: Get pointer to maximum double from arrays of doubles **/
-//    double array[] = {-100.0, 2.0, 4.0, 15.9, 30.9, 33.445, 7.99, 11.3};
-//    buffer<double> _buffer_02 = buffer_alloc<double>(FIXED_BUFFER_SIZE);
-//    for (int i = 0; i < FIXED_BUFFER_SIZE; ++i) {
-//        _buffer_02.values[i] = array[i];
-//        _buffer_02.size = _buffer_02.size + i;
-//    }
-//    if (_buffer_02.values && _buffer_02.size > 0) {
-//        double *max = ptr_to_maximum(&_buffer_02);
-//        std::cout << std::endl;
-//        std::cout << "The Maximum Number is: " << *max << std::endl;
-//        free(_buffer_02.values);
-//    }
+    /** Task #1: b) User enters numbers until predicate and display the maximum one **/
+    buffer<int> _buffer_01 = user_enter_numbers_until_predicate();
+    if (_buffer_01.values && _buffer_01.size > 0) {
+        int *max = ptr_to_maximum(&_buffer_01);
+        std::cout << std::endl;
+        std::cout << "The Maximum Number is: " << *max << std::endl;
+        free(_buffer_01.values);
+    }
 
-//    /** Task #4: User enters several integers and store it in array then split odd ones to left and evens to right **/
-//    buffer<int> _buffer_03 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS-1);
-//    if (_buffer_03.values && _buffer_03.size > 1) {
-//        buffer<int> _buffer_04 = split_odd_even_asides(_buffer_03);
-//        std::cout << std::endl;
-//        std::cout << "Original numbers List: ";
-//        print_buffer(_buffer_03);
-//        std::cout << "Split Odd/Even List: ";
-//        print_buffer(_buffer_04);
-//        free(_buffer_03.values);
-//        free(_buffer_04.values);
-//    } else {
-//        if (_buffer_03.values && _buffer_03.size > 0) free(_buffer_03.values);
-//    }
+    /** Task #1: c) Product class **/
+    product_class_demo();
 
-    // Task 5 stack the biggest number
-//    /** Task #4: User enters several integers and store it in array then using stack to return the maximum one **/
-//    buffer<int> _buffer_05 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS - 1);
-//    if (_buffer_05.values && _buffer_05.size > 1) {
-//        std::cout << std::endl;
-//        int max = get_maximum_using_stack(_buffer_05);
-//        std::cout << "Original numbers List: ";
-//        print_buffer(_buffer_05);
-//        std::cout << "The Maximum Number is: " << max << std::endl;
-//    } else {
-//        if (_buffer_05.values && _buffer_05.size > 0) free(_buffer_05.values);
-//    }
+    /** Task #2: Print all factors of a number **/
+    std::tuple<int, buffer<int>, std::string> tuple_1 = get_a_three_digit_number_factors(84862);
+    if (std::get<0>(tuple_1) > 0) {
+        buffer<int> buffer = std::get<1>(tuple_1);
+        std::cout << std::get<2>(tuple_1);
+        print_buffer(buffer);
+    }
 
-    // Task 6 queue the smallest number
-//    /** Task #4: User enters several integers and store it in array then using queue to return the smallest one **/
-//    buffer<int> _buffer_06 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS - 1);
-//    if (_buffer_06.values && _buffer_06.size > 1) {
-//        std::cout << std::endl;
-//        int Smallest = get_smallest_using_queue(_buffer_06);
-//        std::cout << "Original numbers List: ";
-//        print_buffer(_buffer_06);
-//        std::cout << "The Smallest Number is: " << Smallest << std::endl;
-//    } else {
-//        if (_buffer_06.values && _buffer_06.size > 0) free(_buffer_06.values);
-//    }
-//
-//    /** Task #9: Using map to store and display some movies **/
-//    store_movies_in_map();
+    /** Task #3: Get pointer to maximum double from arrays of doubles **/
+    double array[] = {-100.0, 2.0, 4.0, 15.9, 30.9, 33.445, 7.99, 11.3};
+    buffer<double> _buffer_02 = buffer_alloc<double>(FIXED_BUFFER_SIZE);
+    for (int i = 0; i < FIXED_BUFFER_SIZE; ++i) {
+        _buffer_02.values[i] = array[i];
+        _buffer_02.size = _buffer_02.size + i;
+    }
+    if (_buffer_02.values && _buffer_02.size > 0) {
+        double *max = ptr_to_maximum(&_buffer_02);
+        std::cout << std::endl;
+        std::cout << "The Maximum Number is: " << *max << std::endl;
+        free(_buffer_02.values);
+    }
+
+    /** Task #4: User enters several integers and store it in array then split odd ones to left and evens to right **/
+    buffer<int> _buffer_03 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS-1);
+    if (_buffer_03.values && _buffer_03.size > 1) {
+        buffer<int> _buffer_04 = split_odd_even_asides(_buffer_03);
+        std::cout << std::endl;
+        std::cout << "Original numbers List: ";
+        print_buffer(_buffer_03);
+        std::cout << "Split Odd/Even List: ";
+        print_buffer(_buffer_04);
+        free(_buffer_03.values);
+        free(_buffer_04.values);
+    } else {
+        if (_buffer_03.values && _buffer_03.size > 0) free(_buffer_03.values);
+    }
+
+    /** Task #4: User enters several integers and store it in array then using stack to return the maximum one **/
+    buffer<int> _buffer_05 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS - 1);
+    if (_buffer_05.values && _buffer_05.size > 1) {
+        std::cout << std::endl;
+        int max = get_maximum_using_stack(_buffer_05);
+        std::cout << "Original numbers List: ";
+        print_buffer(_buffer_05);
+        std::cout << "The Maximum Number is: " << max << std::endl;
+    } else {
+        if (_buffer_05.values && _buffer_05.size > 0) free(_buffer_05.values);
+    }
+
+    /** Task #4: User enters several integers and store it in array then using queue to return the smallest one **/
+    buffer<int> _buffer_06 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS - 1);
+    if (_buffer_06.values && _buffer_06.size > 1) {
+        std::cout << std::endl;
+        int Smallest = get_smallest_using_queue(_buffer_06);
+        std::cout << "Original numbers List: ";
+        print_buffer(_buffer_06);
+        std::cout << "The Smallest Number is: " << Smallest << std::endl;
+    } else {
+        if (_buffer_06.values && _buffer_06.size > 0) free(_buffer_06.values);
+    }
+
+    /** Task #9: Using map to store and display some movies **/
+    store_movies_in_map();
 
     return 0;
 
