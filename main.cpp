@@ -229,8 +229,9 @@ typedef struct {
     double totalPrice;
     std::string discount;
     std::string message;
-    double totalAfterPrice;
+    double totalAfterDiscount;
 } MakePurchase;
+
 
 /** Product class that contain public constructor and two consts discount factors used to model the domain **/
 class Product {
@@ -334,8 +335,8 @@ public:
                              + "| " + std::to_string(makePurchase.totalPrice)
                              + std::string(18 - std::to_string(makePurchase.totalPrice).size(), ' ')
                              + "| " + makePurchase.discount + std::string(9 - makePurchase.discount.size(), ' ')
-                             + "| " + std::to_string(makePurchase.totalAfterPrice)
-                             + std::string(27 - std::to_string(makePurchase.totalAfterPrice).size(), ' ')
+                             + "| " + std::to_string(makePurchase.totalAfterDiscount)
+                             + std::string(27 - std::to_string(makePurchase.totalAfterDiscount).size(), ' ')
                              + "|\n" + std::string(134, '-') + "\n";
                 break;
             } else if (i == occupied_slots - 1 && _buffer.values[i].Id != makePurchase.product_id)
