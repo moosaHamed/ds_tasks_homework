@@ -1,26 +1,34 @@
+/**********************************************************************************************/
+/** The following code represent methods, classes, and objects used to implements some demos **/
+/** in main function to demonstrate all tasks mentioned in Data Structure Course Assignment. **/
+/** To run each task alone, you have to comments all tasks and left the one you need to run. **/
+/**********************************************************************************************/
+
 #include <iostream>
 #include <cassert>
 #include <stack>
 #include <queue>
 #include <map>
 
+
+/** Comments all Tasks and Run Only One Task Per Process **/
 static const int FIXED_BUFFER_SIZE = 8;
 static const int MAX_TRIAL_ENTERS = 16;
 
-// Generic template type for allocating a contiguous chunk of memory
+/** Generic template type for allocating a contiguous chunk of memory **/
 template<typename T>
 struct buffer {
     int size;
     T *values;
 };
 
-// Generic template method for allocating a contiguous chunk of memory
+/** Generic template method for allocating a contiguous chunk of memory **/
 template<typename T>
 buffer<T> buffer_alloc(const int size) {
     return {size, (T *) malloc(sizeof(T) * size)};
 }
 
-// Generic template method for reallocating a contiguous chunk of memory
+/** Generic template method for reallocating a contiguous chunk of memory **/
 template<typename T>
 buffer<T> buffer_realloc(buffer<T> &buffer, int new_size) {
     assert(new_size != buffer.size);
@@ -31,7 +39,7 @@ buffer<T> buffer_realloc(buffer<T> &buffer, int new_size) {
     return buffer;
 }
 
-// Generic template method for printing a contiguous chunk of memory in console
+/** Generic template method for printing a contiguous chunk of memory in console **/
 template<typename T>
 void print_buffer(const buffer<T> &buffer) {
     if (buffer.size < 1) return;
@@ -43,9 +51,8 @@ void print_buffer(const buffer<T> &buffer) {
     }
 }
 
-/* Method used for checking if entered character(s) is/are number and return a boolean either true if a number or false if not.
- * This method is used in the following three methods that used (cin) to accept a limited amount of character(s) a time.
-*/
+/** Method used for checking if entered character(s) is/are number and return true if a number or false if not a number **/
+/** This method used by the following three methods that used (cin) to accept a limited amount of character(s) a time **/
 bool as_number(const buffer<char> *buffer) {
     bool flag = false;
     if (buffer->values[0] == '-') {
@@ -68,14 +75,13 @@ bool as_number(const buffer<char> *buffer) {
     return flag;
 }
 
-/*
- * Following three methods used to accept user input from keyboard, and it used (cin) for that purpose. However, the methods designed to
- * limit character numbers that a user can enter at a time specified as "FIXED_BUFFER_SIZE" and limit user trials to enter number(s)
- * specified as "MAX_TRIAL_ENTERS". This customization will improve the design of the task. Since user inputs cannot be predictable,
- * limiting the characters entered will enhance the security of code and then cast entered characters to desired types. Minimizing the
- * trials that user can enter a number will control the scope of the task running time and not make it open to exhaust available resources.
-*/
-// Method #1 to accept user input through keyboard and stored in fixed size buffer specified prior process start.
+/** Following three methods used to accept user input from keyboard, and it used (cin) for that purpose. However, the methods designed to **/
+/** limit character numbers that a user can enter at a time specified as "FIXED_BUFFER_SIZE" and limit user trials to enter number(s) **/
+/** specified as "MAX_TRIAL_ENTERS". This customization will improve the design of the task. Since user inputs cannot be predictable, **/
+/** limiting the characters entered will enhance the security of code and then cast entered characters to desired types. Minimizing the **/
+/** trials that user can enter a number will control the scope of the task running time and not make it open to exhaust available resources. **/
+
+/** Method #1 to accept user input through keyboard and stored in fixed size buffer specified prior process start **/
 buffer<int> user_enter_fixed_size_numbers(int size) {
     assert(size < MAX_TRIAL_ENTERS);
     buffer<char> char_buffer = buffer_alloc<char>(FIXED_BUFFER_SIZE);
@@ -100,10 +106,10 @@ buffer<int> user_enter_fixed_size_numbers(int size) {
                 std::cout << "Not Valid Number, please try again" << std::endl;
                 i--;
             }
-            // to ignore multiple entered numbers seperated by spaces by user
+            /** to ignore multiple entered numbers seperated by spaces by user **/
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } else {
-            std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!.." << std::endl;
+            std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!..\n";
             break;
         }
 
@@ -111,19 +117,17 @@ buffer<int> user_enter_fixed_size_numbers(int size) {
     return int_buffer;
 }
 
-/*
- * Method #2 to accept user input through keyboard and stored in fixed size buffer without specifying the buffer size.
- * The Process will terminate either if a user hits the max trials allowed or once predicate is true.The output buffer
- * will reallocate a new chunk of "FIXED_BUFFER_SIZE" if predicate is not equal to true.However, the process will
- * terminate if the user hits the max trail even if predicate is not equal to true.
-*/
+/** Method #2 to accept user input through keyboard and stored in fixed size buffer without specifying the buffer size. **/
+/** The Process will terminate either if a user hits the max trials allowed or once predicate is true.The output buffer **/
+/** will reallocate a new chunk of "FIXED_BUFFER_SIZE" if predicate is not equal to true.However, the process will **/
+/** terminate if the user hits the max trail even if predicate is not equal to true. **/
 buffer<int> user_enter_numbers_until_predicate() {
     buffer<char> char_buffer = buffer_alloc<char>(FIXED_BUFFER_SIZE);
     buffer<int> int_buffer = buffer_alloc<int>(MAX_TRIAL_ENTERS / 2);
     int_buffer.size = 0;
     int trial_count = 0;
-    std::cout << "Kindly, Enter some Number(s):" << std::endl;
-    std::cout << "Note: Process will terminate if number is negative or once hitting max trials" << std::endl;
+    std::cout << "Kindly, Enter some Number(s):\n";
+    std::cout << "Note: Process will terminate if number is negative or once hitting max trials\n";
     for (int i = 0; i < MAX_TRIAL_ENTERS; ++i) {
         if (trial_count < MAX_TRIAL_ENTERS) {
             if (int_buffer.size <= i) buffer_realloc(int_buffer, int_buffer.size + MAX_TRIAL_ENTERS / 2);
@@ -146,25 +150,23 @@ buffer<int> user_enter_numbers_until_predicate() {
                 std::cout << "Not Valid Number, please try again" << std::endl;
                 i--;
             }
-            // to ignore multiple entered numbers seperated by spaces by user
+            /** to ignore multiple entered numbers seperated by spaces by user **/
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } else {
-            std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!.." << std::endl;
+            std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!..\n";
             break;
         }
     }
     return int_buffer;
 }
 
-/*
- * Method #3 to accept user input through keyboard and stored in single int type in buffer. The Process will terminate either if a user hits the max
- * trials allowed or once a single int type is entered.
-*/
+/**  Method #3 to accept user input through keyboard and stored in single int type in buffer.The Process **/
+/**  will terminate either if a user hits the max trials allowed or once a single int type is entered. **/
 int *user_enter_a_number() {
     buffer<char> char_buffer = buffer_alloc<char>(FIXED_BUFFER_SIZE);
     int *n = (int *) malloc(sizeof(int));
     int trial_count = 0;
-    std::cout << "Kindly enter a number. Note: Process will terminate if you enter a number or once hitting max trials" << std::endl;
+    std::cout << "Kindly enter a number. Note: Process will terminate if you enter a number or once hitting max trials\n";
     for (int i = 0; i < MAX_TRIAL_ENTERS - 1; ++i) {
         std::cout << "Enter a number: ";
         // specifying input length before using (cin)
@@ -178,25 +180,25 @@ int *user_enter_a_number() {
             break;
         } else {
             if (trial_count == MAX_TRIAL_ENTERS - 1) {
-                std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!.." << std::endl;
+                std::cout << "Sorry, Process Terminated. You reached the Maximum Trials!..\n";
                 n = nullptr;
                 break;
-            } else {
-                std::cout << "Not Valid Number, please try again" << std::endl;
-            }
+            } else std::cout << "Not Valid Number, please try again\n";
         }
-        // to ignore multiple entered numbers seperated by spaces by user
+        /** to ignore multiple entered numbers seperated by spaces by user **/
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return n;
 }
 
+/** Enum type to control Discount in Product class **/
 typedef enum {
     Percent_20,
     Percent_10,
     No_Discount
 } Discount;
 
+/** Helper method to print Discount message if applicable in Product class **/
 std::string discount_message(Discount discount) {
     switch (discount) {
         case Percent_20:
@@ -208,6 +210,7 @@ std::string discount_message(Discount discount) {
     }
 }
 
+/** Helper method to print Discount amount if applicable in Product class **/
 std::string stringify_discount(Discount discount) {
     switch (discount) {
         case Percent_20:
@@ -219,6 +222,7 @@ std::string stringify_discount(Discount discount) {
     }
 }
 
+/** Type used to return from make_purchase function in Product class **/
 typedef struct {
     int product_id;
     int requestedQty;
@@ -228,6 +232,7 @@ typedef struct {
     double totalAfterPrice;
 } MakePurchase;
 
+/** Product class that contain public constructor and two consts discount factors used to model the domain **/
 class Product {
 public:
     int Id;
@@ -235,8 +240,8 @@ public:
     double UnitPrice;
     int AvailableStock;
 
-    constexpr static const double DISCOUNT_10_PERCENT_FACTOR = 0.9;
-    constexpr static const double DISCOUNT_20_PERCENT_FACTOR = 0.8;
+    constexpr static const double DISCOUNT_10_PERCENT_FACTOR = 0.9;   /** 100% - 10% = 90% => (0.9) * ger_price(qty) **/
+    constexpr static const double DISCOUNT_20_PERCENT_FACTOR = 0.8;   /** 100% - 20% = 80% => (0.8) * ger_price(qty) **/
 
     Product(int id, const std::string &productName, double unitPrice, int initialStock) {
         Id = id;
@@ -272,6 +277,8 @@ public:
     }
 };
 
+/** ProductRepository class that contain public constructor and three consts that control some sizes of allocated buffers in memory for **/
+/** security purpose. Overall, ProductRepository acts as in memory database, once the process killed all data gone. **/
 class ProductRepository {
 private:
     const int MAX_PRODUCT_NAME_SIZE = 40;
@@ -352,7 +359,7 @@ public:
     }
 };
 
-// The following template method returns a pointer to maximum number from a contiguous memory buffer using c++11.
+/** The following template method returns a pointer to maximum number from a contiguous memory buffer using c++11 **/
 template<typename T>
 T *ptr_to_maximum(const buffer<T> *buffer) {
     if (buffer == nullptr) return nullptr;
@@ -366,7 +373,7 @@ T *ptr_to_maximum(const buffer<T> *buffer) {
     return max_ptr;
 }
 
-// The following method returns all factor(s) for a 6 digits number and stores it in contiguous memory buffer using c++11.
+/** The following method returns all factor(s) for a 6 digits number and stores it in contiguous memory buffer using c++11 **/
 std::tuple<int, buffer<int>, std::string> get_a_three_digit_number_factors(const int integer) {
     int count = 0;
     buffer<int> _buffer = buffer_alloc<int>(FIXED_BUFFER_SIZE);
@@ -390,7 +397,7 @@ std::tuple<int, buffer<int>, std::string> get_a_three_digit_number_factors(const
     return std::make_tuple(count, _buffer, "The are/is " + std::to_string(count) + " factor(s) for the number " + std::to_string(integer) + " :");
 }
 
-// The following method splits Even/Odd numbers asides in contiguous memory buffer using c++11.
+/** The following method splits Even/Odd numbers asides in contiguous memory buffer using c++11 **/
 buffer<int> split_odd_even_asides(const buffer<int> &int_buffer) {
     assert(int_buffer.size >= 2);
     buffer<int> buffer = buffer_alloc<int>(int_buffer.size);
@@ -409,7 +416,7 @@ buffer<int> split_odd_even_asides(const buffer<int> &int_buffer) {
     return buffer;
 }
 
-// The following method demonstrates the creation of new std::stack in c++11 and using it to get the maximum in contiguous memory buffer.
+/** The following method demonstrates the creation of new std::stack in c++11 and using it to get the maximum in contiguous memory buffer **/
 int get_maximum_using_stack(const buffer<int> &buffer) {
     int maximum;
     std::stack<int> stack;
@@ -422,7 +429,7 @@ int get_maximum_using_stack(const buffer<int> &buffer) {
     return maximum;
 }
 
-// The following method demonstrates the creation of new std::queue in c++11 and using it to get smallest in contiguous memory buffer.
+/** The following method demonstrates the creation of new std::queue in c++11 and using it to get smallest in contiguous memory buffer **/
 int get_smallest_using_queue(const buffer<int> &buffer) {
     int smallest;
     std::queue<int> queue;
@@ -435,7 +442,7 @@ int get_smallest_using_queue(const buffer<int> &buffer) {
     return smallest;
 }
 
-// The following method demonstrates the creation of new std::map in c++11 and iteration on it to print it and find an item(s) on it.
+/** The following method demonstrates the creation of new std::map in c++11 and iteration on it to print it and find an item(s) on it **/
 void store_movies_in_map() {
     //declare variables & Store data in the map
     std::map<int, std::string> movies_map{{1, "Ghosted"},
@@ -456,6 +463,7 @@ void store_movies_in_map() {
 
 }
 
+/** The following method demonstrates adding 4 products to productRepository and list it all and an example of purchasing one **/
 void product_class_demo() {
     std::map<std::string, double> row_data{{"2\" BRASS GATE VALVE",                       11.8},
                                            {"1\" uPVC H.P.ELBOW 90DEG S/W FIP",           0.2995},
@@ -477,10 +485,6 @@ void product_class_demo() {
 }
 
 int main() {
-
-    /**********************************************************/
-    /** Comments all Tasks and Run Only One Task Per Process **/
-    /**********************************************************/
 
     /** Task #1: a) User enters 3 numbers and display the maximum one **/
     buffer<int> _buffer = user_enter_fixed_size_numbers(3);
