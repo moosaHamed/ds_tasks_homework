@@ -164,9 +164,9 @@ int *user_enter_a_number() {
     buffer<char> char_buffer = buffer_alloc<char>(FIXED_BUFFER_SIZE);
     int *n = (int *) malloc(sizeof(int));
     int trial_count = 0;
+    std::cout << "Kindly enter a number. Note: Process will terminate if you enter a number or once hitting max trials" << std::endl;
     for (int i = 0; i < MAX_TRIAL_ENTERS - 1; ++i) {
         std::cout << "Enter a number: ";
-        std::cout << "Note: Process will terminate if you enter a number or once hitting max trials" << std::endl;
         // specifying input length before using (cin)
         std::cin.width(FIXED_BUFFER_SIZE);
         std::cin >> char_buffer.values;
@@ -442,7 +442,7 @@ int get_smallest_using_queue(const buffer<int> &buffer) {
     return smallest;
 }
 
-// The following method demonstrates the creation of new std::map in c++11 and iteration on it to print it and find an item on it.
+// The following method demonstrates the creation of new std::map in c++11 and iteration on it to print it and find an item(s) on it.
 void store_movies_in_map() {
     //declare variables & Store data in the map
     std::map<int, std::string> movies_map{{1, "Ghosted"},
@@ -453,7 +453,7 @@ void store_movies_in_map() {
     std::cout << "Movie ID" << "   " << "Movie Name" << std::endl;
     for (const auto &m: movies_map)
         std::cout << m.first << "          " << m.second << std::endl;
-    // display the IDs of movies which name starts with ‘S’
+    // display the IDs of movies that name starts with ‘S’
     std::cout << std::endl;
     std::cout << "Movie(s) start with letter ‘S’:" << std::endl;
     std::cout << "Movie ID" << "   " << "Movie Name" << std::endl;
@@ -513,12 +513,17 @@ int main() {
     product_class_demo();
 
     /** Task #2: Print all factors of a number **/
-    std::tuple<int, buffer<int>, std::string> tuple_1 = get_a_three_digit_number_factors(84862);
-    if (std::get<0>(tuple_1) > 0) {
-        buffer<int> buffer = std::get<1>(tuple_1);
-        std::cout << std::get<2>(tuple_1);
-        print_buffer(buffer);
+    int *int_ = user_enter_a_number();
+    if (int_) {
+        std::tuple<int, buffer<int>, std::string> tuple_1 = get_a_three_digit_number_factors(*int_);
+        if (std::get<0>(tuple_1) > 0) {
+            buffer<int> buffer = std::get<1>(tuple_1);
+            std::cout << std::get<2>(tuple_1);
+            print_buffer(buffer);
+        }
+        free(int_);
     }
+
 
     /** Task #3: Get pointer to maximum double from arrays of doubles **/
     double array[] = {-100.0, 2.0, 4.0, 15.9, 30.9, 33.445, 7.99, 11.3};
@@ -535,7 +540,7 @@ int main() {
     }
 
     /** Task #4: User enters several integers and store it in array then split odd ones to left and evens to right **/
-    buffer<int> _buffer_03 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS-1);
+    buffer<int> _buffer_03 = user_enter_fixed_size_numbers(MAX_TRIAL_ENTERS - 1);
     if (_buffer_03.values && _buffer_03.size > 1) {
         buffer<int> _buffer_04 = split_odd_even_asides(_buffer_03);
         std::cout << std::endl;
@@ -573,7 +578,7 @@ int main() {
         if (_buffer_06.values && _buffer_06.size > 0) free(_buffer_06.values);
     }
 
-    /** Task #9: Using map to store and display some movies **/
+    /** Task #9: Using map to store and display some movies and applying filter to query some movies **/
     store_movies_in_map();
 
     return 0;
