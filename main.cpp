@@ -75,7 +75,6 @@ bool as_number(const buffer<char> *buffer) {
  * limiting the characters entered will enhance the security of code and then cast entered characters to desired types. Minimizing the
  * trials that user can enter a number will control the scope of the task running time and not make it open to exhaust available resources.
 */
-
 // Method #1 to accept user input through keyboard and stored in fixed size buffer specified prior process start.
 buffer<int> user_enter_fixed_size_numbers(int size) {
     assert(size < MAX_TRIAL_ENTERS);
@@ -314,49 +313,35 @@ public:
     void print_purchase_product(MakePurchase &makePurchase) const {
         for (int i = 0; i < occupied_slots; ++i) {
             if (_buffer.values[i].Id == makePurchase.product_id) {
-                std::cout
-                        << "______________________________________________________________________________________________________________________________________\n";
-                std::cout
-                        << "| You purchased the following:                                                                                                       |\n";
-                std::cout
-                        << "--------------------------------------------------------------------------------------------------------------------------------------\n";
-                std::cout
-                        << "| ID | Product Name                            | Qty. | Unit Price (OMR) | Total Price (OMR) | Discount | Total After Discount (OMR) |\n";
-                std::cout
-                        << "--------------------------------------------------------------------------------------------------------------------------------------\n";
-                std::cout << "| " + std::to_string(_buffer.values[i].Id) + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ') + "| "
+                std::cout << std::string(134, '_') + "\n| You purchased the following:" + std::string(103, ' ') + "|\n" + std::string(134, '-') + "\n" +
+                             "| ID | Product Name" + std::string(28, ' ') +
+                             "| Qty. | Unit Price (OMR) | Total Price (OMR) | Discount | Total After Discount (OMR) |\n" + std::string(134, '-') + "\n" +
+                             "| " + std::to_string(_buffer.values[i].Id) + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ') + "| "
                              + _buffer.values[i].ProductName + std::string(40 - _buffer.values[i].ProductName.size(), ' ') + "| "
                              + std::to_string(makePurchase.requestedQty) + std::string(5 - std::to_string(makePurchase.requestedQty).size(), ' ') + "| "
                              + std::to_string(_buffer.values[i].UnitPrice) + std::string(17 - std::to_string(_buffer.values[i].UnitPrice).size(), ' ') + "| "
                              + std::to_string(makePurchase.totalPrice) + std::string(18 - std::to_string(makePurchase.totalPrice).size(), ' ') + "| "
                              + makePurchase.discount + std::string(9 - makePurchase.discount.size(), ' ') + "| " + std::to_string(makePurchase.totalAfterPrice)
-                             + std::string(27 - std::to_string(makePurchase.totalAfterPrice).size(), ' ') + "|\n";
-                std::cout
-                        << "--------------------------------------------------------------------------------------------------------------------------------------\n";
+                             + std::string(27 - std::to_string(makePurchase.totalAfterPrice).size(), ' ') + "|\n" + std::string(134, '-') + "\n";
                 break;
-            } else if (i == occupied_slots - 1 && _buffer.values[i].Id != makePurchase.product_id) {
-                std::cout << makePurchase.message << std::endl;
-            } else continue;
+            } else if (i == occupied_slots - 1 && _buffer.values[i].Id != makePurchase.product_id) std::cout << makePurchase.message << std::endl;
+            else continue;
         }
     }
 
     void print_repo_products() const {
         if (occupied_slots == 0) return;
-        std::cout << "_____________________________________________________________________________________\n";
-        std::cout << "| Available Products in Store:                                                      |\n";
-        std::cout << "-------------------------------------------------------------------------------------\n";
-        std::cout << "| ID | Product Name                            | Available Stock | Unit Price (OMR) |\n";
-        std::cout << "-------------------------------------------------------------------------------------\n";
-        for (int i = 0; i < occupied_slots; ++i) {
-            std::cout << "| " + std::to_string(_buffer.values[i].Id) + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ') + "| "
-                         + _buffer.values[i].ProductName + std::string(40 - _buffer.values[i].ProductName.size(), ' ') + "| "
-                         + std::to_string(_buffer.values[i].AvailableStock) + std::string(16 - std::to_string(_buffer.values[i].AvailableStock).size(), ' ') +
-                         "| "
-                         + std::to_string(_buffer.values[i].UnitPrice) + std::string(17 - std::to_string(_buffer.values[i].UnitPrice).size(), ' ') + "|\n";
-            std::cout << "-------------------------------------------------------------------------------------\n";
-        }
+        std::cout << std::string(85, '_') + "\n| Available Products in Store:" + std::string(54, ' ') + "|\n" + std::string(85, '-') + "\n" +
+                     "| ID | Product Name" + std::string(28, ' ') + "| Available Stock | Unit Price (OMR) |\n" + std::string(85, '-') + "\n";
+        for (int i = 0; i < occupied_slots; ++i)
+            std::cout << "| " + std::to_string(_buffer.values[i].Id) + std::string(3 - std::to_string(_buffer.values[i].Id).size(), ' ')
+                         + "| " + _buffer.values[i].ProductName + std::string(40 - _buffer.values[i].ProductName.size(), ' ')
+                         + "| " + std::to_string(_buffer.values[i].AvailableStock)
+                         + std::string(16 - std::to_string(_buffer.values[i].AvailableStock).size(), ' ')
+                         + "| " + std::to_string(_buffer.values[i].UnitPrice) +
+                         std::string(17 - std::to_string(_buffer.values[i].UnitPrice).size(), ' ')
+                         + "|\n" + std::string(85, '-') + "\n";
     }
-
 };
 
 // The following template method returns a pointer to maximum number from a contiguous memory buffer using c++11.
@@ -390,7 +375,7 @@ std::tuple<int, buffer<int>, std::string> get_a_three_digit_number_factors(const
         }
     } else return std::make_tuple(0, _buffer, "The number must be from 1 to 999999 to get its factors");
 
-//  for security purpose and avoiding memory leak, realloc and reduce buffer size to match count
+    // for security purpose and avoiding memory leak, realloc and reduce buffer size to match count
     if (count != _buffer.size) {
         buffer_realloc(_buffer, count);
     }
@@ -524,7 +509,6 @@ int main() {
         free(int_);
     }
 
-
     /** Task #3: Get pointer to maximum double from arrays of doubles **/
     double array[] = {-100.0, 2.0, 4.0, 15.9, 30.9, 33.445, 7.99, 11.3};
     buffer<double> _buffer_02 = buffer_alloc<double>(FIXED_BUFFER_SIZE);
@@ -582,5 +566,4 @@ int main() {
     store_movies_in_map();
 
     return 0;
-
 }
